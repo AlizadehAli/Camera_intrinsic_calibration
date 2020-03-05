@@ -20,12 +20,11 @@ def parse_arguments():
 
 def main(in_dir, out_dir):
     for dir in tqdm(os.listdir(in_dir)):
-        mtx = np.load(os.path.join(in_dir+ '/' + dir, 'mtx.npy'))
-        dist = np.load(os.path.join(in_dir+ '/' + dir, 'dist.npy'))
+        mtx = np.load(os.path.join(in_dir, 'mtx.npy'))
+        dist = np.load(os.path.join(in_dir, 'dist.npy'))
         images = glob.glob(in_dir + '/' + os.path.join(dir, '*.png'))
+        print(images)
         for fname in tqdm(images):
-            print('fname: ', fname)
-            print('imwrite: ', os.path.join(out_dir, fname.split('/')[-1]))
             img = cv2.imread(fname)
             # undistort
             dst = cv2.undistort(img, mtx, dist, None, mtx)
